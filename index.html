@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <title>Drawing App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <!-- icons cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"></link>
+    <!-- font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="main.css"></link>
+</head>
+
+<body>
+    <h1 class="center-2">Drawing App (Not Proper)</h1>
+    <div class="container">
+        <div class="options">
+            <!-- <div class="box">
+                <select id="shapes" class="opt">
+                    <option value="Line">Line</option>
+                    <option value="Circle">Circle</option>
+                    <option value="Rectangle">Rectangle</option>
+                </select>
+                <p>Shapes</p>
+            </div> -->
+            <div class="box">
+                <input type="color" id="color" class="opt">
+                <p>Color</p>
+            </div>
+            <div class="box">
+                <input type="range" id="size" class="opt" min="1" max="20" value="1">
+                <p>Size</p>
+            </div>
+            <button type="button" id="button" onclick="clearBoard()">Clear<br/>Board</button>
+        </div>
+        <canvas class="board" id="board"></canvas>
+    </div>
+    <p class="center">Thanks For Visiting Regards! Muhammad Ahad&copy;</p>
+    <script src="./main.js"></script>
+
+</body>
