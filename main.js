@@ -1,18 +1,20 @@
 let board = document.getElementById("board");
 let color = document.getElementById("color");
 let size = document.getElementById("size");
+let save = document.getElementById("save")
 let context = board.getContext("2d");
 let isLine = false;
 let finalOffsetX = 0;
 let finalOffsetY = 0;
 
-board.addEventListener("mousedown", function(event) {
+board.addEventListener("mousedown", function (event) {
     isLine = true;
     finalOffsetX = event.offsetX;
     finalOffsetY = event.offsetY;
+    // console.log(event)
 });
 
-board.addEventListener("mousemove", function(event) {
+board.addEventListener("mousemove", function (event) {
     if (isLine) {
         context.beginPath();
         context.moveTo(finalOffsetX, finalOffsetY);
@@ -25,7 +27,7 @@ board.addEventListener("mousemove", function(event) {
     }
 });
 
-board.addEventListener("mouseup", function() {
+board.addEventListener("mouseup", function () {
     isLine = false;
 });
 
@@ -33,7 +35,7 @@ function clearBoard() {
     context.clearRect(0, 0, board.width, board.height);
 }
 
-board.addEventListener("touchstart", function(event) {
+board.addEventListener("touchstart", function (event) {
     event.preventDefault();
     isLine = true;
     let coordinates = getCoordinates(event.touches[0]);
@@ -41,7 +43,7 @@ board.addEventListener("touchstart", function(event) {
     finalOffsetY = coordinates.y;
 });
 
-board.addEventListener("touchmove", function(event) {
+board.addEventListener("touchmove", function (event) {
     event.preventDefault();
     if (isLine) {
         let coordinates = getCoordinates(event.touches[0]);
@@ -56,7 +58,7 @@ board.addEventListener("touchmove", function(event) {
     }
 });
 
-board.addEventListener("touchend", function() {
+board.addEventListener("touchend", function () {
     isLine = false;
 });
 
@@ -69,3 +71,12 @@ function getCoordinates(touch) {
         y: touch.clientY - rect.top,
     };
 }
+
+// save button
+
+save.addEventListener("click", () => {
+    let link = document.createElement("a");
+    link.download = `${Date.now()}.jpg`;
+    link.href = board.toDataURL();
+    link.click();
+});
