@@ -10,15 +10,29 @@ body {
     justify-content: space-between;
     align-items: center;
     color: #212121;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     margin: 0em;
     background-color: #efefef;
     /* padding: 1em 0em; */
     /* justify-self: center; */
 }
 
-p {
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.2em;
+}
+
+i {
+    cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3 {
     margin: 0em;
 }
 
@@ -44,6 +58,10 @@ p {
     column-gap: 1em;
 }
 
+#shapes {
+    width: 5em;
+}
+
 .opt {
     width: 4em;
     height: 3em;
@@ -66,7 +84,7 @@ p {
     border: 0px;
     background-color: #fff;
     color: #212121;
-    padding: 0.5em;
+    padding: 0.8em 0.5em;
     border-radius: 10px;
     width: 100%;
     height: 4em;
@@ -76,6 +94,7 @@ p {
 
 .box p {
     cursor: pointer;
+    margin-top: 0.5em;
 }
 
 button {
@@ -90,10 +109,26 @@ button {
     cursor: pointer;
 }
 
+label i {
+    width: 3em;
+    height: 3em;
+    padding: 0.2em;
+    border: 0px;
+    background-color: #efefef;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #212121;
+    font-size: 1.3em;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
 .board {
     background-color: #fff;
-    /* width: 100%;
-    height: 100%; */
+    width: 90%;
+    height: 90%;
     cursor: crosshair;
     border-radius: 15px;
     border: 0px;

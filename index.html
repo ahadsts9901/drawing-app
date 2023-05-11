@@ -24,14 +24,20 @@
     <h1 class="center-2">Drawing App (Not Proper)</h1>
     <div class="container">
         <div class="options">
-            <!-- <div class="box">
-                <select id="shapes" class="opt">
-                    <option value="Line">Line</option>
-                    <option value="Circle">Circle</option>
-                    <option value="Rectangle">Rectangle</option>
-                </select>
+            <div class="box">
+                <div class="row">
+                    <label for="line"><i class="bi bi-slash"></i></label>
+                    <input type="radio" id="line" class="shapes" name="shapes" value="line">
+
+                    <label for="circle"><i class="bi bi-circle"></i></label>
+                    <input type="radio" id="circle" class="shapes" name="shapes" value="circle">
+
+                    <label for="rectangle"><i class="bi bi-square"></i></label>
+                    <input type="radio" id="rectangle" class="shapes" name="shapes" value="rectangle">
+
+                </div>
                 <p>Shapes</p>
-            </div> -->
+            </div>
             <div class="box">
                 <input type="color" id="color" class="opt">
                 <p>Color</p>
@@ -41,51 +47,62 @@
                 <p>Size</p>
             </div>
             <button type="button" id="button" onclick="clearBoard()">Clear<br />Board</button>
-            <button type="button" id="save">Save</button>
+            <button type="button" id="save"><i class="bi bi-save"></i><br/>Save</button>
         </div>
         <canvas class="board" id="board"></canvas>
     </div>
     <p class="center">Thanks For Visiting Regards! Muhammad Ahad&copy;</p>
     <script src="./main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
     <script>
         // for bilal zafar
-        
-//canvas.addEventListener("touchstart", function (event) {
-//   event.preventDefault();
-//   cDrawing = true;
-//   let coordinates = getCoordinates(event.touches[0]);
-//   finalOffsetX = coordinates.x;
-//   finalOffsetY = coordinates.y;
-// });
 
-// canvas.addEventListener("touchmove", function (event) {
-//   event.preventDefault();
-//   if (cDrawing) {
-//     let coordinates = getCoordinates(event.touches[0]);
-//     cObject.beginPath();
-//     cObject.moveTo(finalOffsetX, finalOffsetY);
-//     cObject.lineTo(coordinates.x, coordinates.y);
-//     cObject.stroke();
-//     finalOffsetX = coordinates.x;
-//     finalOffsetY = coordinates.y;
-//     cObject.strokeStyle = colors.value;
-//     cObject.lineWidth = lineWidth.value;
-//   }
-// });
+        //canvas.addEventListener("touchstart", function (event) {
+        //   event.preventDefault();
+        //   cDrawing = true;
+        //   let coordinates = getCoordinates(event.touches[0]);
+        //   finalOffsetX = coordinates.x;
+        //   finalOffsetY = coordinates.y;
+        // });
 
-// canvas.addEventListener("touchend", function () {
-//   cDrawing = false;
-// });
+        // canvas.addEventListener("touchmove", function (event) {
+        //   event.preventDefault();
+        //   if (cDrawing) {
+        //     let coordinates = getCoordinates(event.touches[0]);
+        //     cObject.beginPath();
+        //     cObject.moveTo(finalOffsetX, finalOffsetY);
+        //     cObject.lineTo(coordinates.x, coordinates.y);
+        //     cObject.stroke();
+        //     finalOffsetX = coordinates.x;
+        //     finalOffsetY = coordinates.y;
+        //     cObject.strokeStyle = colors.value;
+        //     cObject.lineWidth = lineWidth.value;
+        //   }
+        // });
 
-// //get by youtube help
+        // canvas.addEventListener("touchend", function () {
+        //   cDrawing = false;
+        // });
 
-// function getCoordinates(touch) {
-//   let rect = canvas.getBoundingClientRect();
-//   return {
-//     x: touch.clientX - rect.left,
-//     y: touch.clientY - rect.top,
-//   };
-// }
+        // //get by youtube help
+
+        // function getCoordinates(touch) {
+        //   let rect = canvas.getBoundingClientRect();
+        //   return {
+        //     x: touch.clientX - rect.left,
+        //     y: touch.clientY - rect.top,
+        //   };
+        // }
     </script>
 
 </body>

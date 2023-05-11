@@ -1,0 +1,39 @@
+<>
+
+
+    <title>My Drawing App</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+
+
+    <h1>My Drawing App</h1>
+    <canvas id="myCanvas" width="500" height="500" />
+    <br />
+    <button onClick={drawRectangle}>Draw Rectangle</button>
+    <button onClick={drawCircle}>Draw Circle</button>
+    <button onClick={clearCanvas}>Clear Canvas</button>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext("2d");
+
+        function drawRectangle() {
+            context.fillStyle = "blue";
+            context.fillRect(50, 50, 100, 100);
+        }
+
+        function drawCircle() {
+            context.beginPath();
+            context.arc(250, 250, 50, 0, 2 * Math.PI);
+            context.fillStyle = "red";
+            context.fill();
+        }
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+
+    </>
