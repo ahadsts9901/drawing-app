@@ -1,39 +1,85 @@
-<>
+<!DOCTYPE html>
+<html>
 
-
-    <title>My Drawing App</title>
+<head>
+    <title>Drawing App</title>
     <style>
         canvas {
             border: 1px solid black;
         }
     </style>
+</head>
 
-
-    <h1>My Drawing App</h1>
-    <canvas id="myCanvas" width="500" height="500" />
-    <br />
-    <button onClick={drawRectangle}>Draw Rectangle</button>
-    <button onClick={drawCircle}>Draw Circle</button>
-    <button onClick={clearCanvas}>Clear Canvas</button>
+<body>
+    <canvas id="canvas"></canvas>
+    <button onclick="setShape('rectangle')">Rectangle</button>
+    <button onclick="setShape('circle')">Circle</button>
+    <button onclick="setShape('triangle')">Triangle</button>
     <script>
-        var canvas = document.getElementById("myCanvas");
-        var context = canvas.getContext("2d");
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let currentShape = null;
+        let startPoint = null;
 
-        function drawRectangle() {
-            context.fillStyle = "blue";
-            context.fillRect(50, 50, 100, 100);
+        canvas.addEventListener('mousedown', (event) => {
+            isDrawing = true;
+            [lastX, lastY] = [event.clientX, event.clientY];
+            startPoint = [event.clientX, event.clientY];
+        });
+
+        canvas.addEventListener('mousemove', (event) => {
+            if (isDrawing) {
+                if (currentShape) {
+                    drawShape(startPoint[0], startPoint[1], event.clientX, event.clientY, currentShape);
+                } else {
+                    const x = event.clientX;
+                    const y = event.clientY;
+                    context.beginPath();
+                    context.moveTo(lastX, lastY);
+                    context.lineTo(x, y);
+                    context.stroke();
+                    [lastX, lastY] = [x, y];
+                }
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            startPoint = null;
+        });
+
+        canvas.addEventListener('mouseout', () => {
+            isDrawing = false;
+            startPoint = null;
+        });
+
+        function setShape(shape) {
+            currentShape = shape;
         }
 
-        function drawCircle() {
+        function drawShape(x1, y1, x2, y2, shape) {
             context.beginPath();
-            context.arc(250, 250, 50, 0, 2 * Math.PI);
-            context.fillStyle = "red";
-            context.fill();
-        }
-
-        function clearCanvas() {
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            if (shape === 'rectangle') {
+                const width = x2 - x1;
+                const height = y2 - y1;
+                context.rect(x1, y1, width, height);
+            } else if (shape === 'circle') {
+                const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                context.arc(x1, y1, radius, 0, 2 * Math.PI);
+            } else if (shape === 'triangle') {
+                const width = x2 - x1;
+                const height = y2 - y1;
+                context.moveTo(x1, y1);
+                context.lineTo(x1 + width, y1);
+                context.lineTo(x1 + (width / 2), y1 - height);
+                context.closePath();
+            }
+            context.stroke();
         }
     </script>
+</body>
 
-    </>
+</html>

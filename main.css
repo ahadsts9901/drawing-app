@@ -23,6 +23,7 @@ body {
     justify-content: center;
     align-items: center;
     column-gap: 0.2em;
+    cursor: pointer;
 }
 
 i {
@@ -86,13 +87,14 @@ h3 {
     color: #212121;
     padding: 0.8em 0.5em;
     border-radius: 10px;
-    width: 100%;
+    /* width: ; */
     height: 4em;
     font-size: 1em;
     cursor: pointer;
 }
 
-.box p {
+.box p,
+#shape-fill-check~label {
     cursor: pointer;
     margin-top: 0.5em;
 }
@@ -125,8 +127,22 @@ input[type="radio"] {
     display: none;
 }
 
+input[type="radio"]:checked+label>i {
+    color: #efefef;
+    background-color: #212121;
+}
+
+input[type="checkbox"] {
+    margin-top: 0.8em;
+    cursor: pointer;
+}
+
 .board {
     background-color: #fff;
+    background-image: url(./images/background.png);
+    background-position: center center;
+    background-size: 100px;
+    background-repeat: repeat;
     width: 90%;
     height: 90%;
     cursor: crosshair;
