@@ -16,70 +16,88 @@
     <button onclick="setShape('circle')">Circle</button>
     <button onclick="setShape('triangle')">Triangle</button>
     <script>
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        let isDrawing = false;
-        let lastX = 0;
-        let lastY = 0;
-        let currentShape = null;
-        let startPoint = null;
+(function($) {
 
-        canvas.addEventListener('mousedown', (event) => {
-            isDrawing = true;
-            [lastX, lastY] = [event.clientX, event.clientY];
-            startPoint = [event.clientX, event.clientY];
-        });
+  var tool;
 
-        canvas.addEventListener('mousemove', (event) => {
-            if (isDrawing) {
-                if (currentShape) {
-                    drawShape(startPoint[0], startPoint[1], event.clientX, event.clientY, currentShape);
-                } else {
-                    const x = event.clientX;
-                    const y = event.clientY;
-                    context.beginPath();
-                    context.moveTo(lastX, lastY);
-                    context.lineTo(x, y);
-                    context.stroke();
-                    [lastX, lastY] = [x, y];
-                }
-            }
-        });
+  var canvas = $('board');
 
-        canvas.addEventListener('mouseup', () => {
-            isDrawing = false;
-            startPoint = null;
-        });
+  var ctx = canvas.getContext('2d');
 
-        canvas.addEventListener('mouseout', () => {
-            isDrawing = false;
-            startPoint = null;
-        });
+  
 
-        function setShape(shape) {
-            currentShape = shape;
+  var history = {
+
+    redo_list: [],
+
+    undo_list: [],
+
+    saveState: function(canvas, list, keep_redo) {
+
+      keep_redo = keep_redo || false;
+
+      if(!keep_redo) {
+
+        this.redo_list = [];
+
+      }
+
+      
+
+      (list || this.undo_list).push(canvas.toDataURL());   
+
+    },
+
+    undo: function(canvas, ctx) {
+
+      this.restoreState(canvas, ctx, this.undo_list, this.redo_list);
+
+    },
+
+    redo: function(canvas, ctx) {
+
+      this.restoreState(canvas, ctx, this.redo_list, this.undo_list);
+
+    },
+
+    restoreState: function(canvas, ctx,  pop, push) {
+
+      if(pop.length) {
+
+        this.saveState(canvas, push, true);
+
+        var restore_state = pop.pop();
+
+        var img = new Element('img', {'src':restore_state});
+
+        img.onload = function() {
+
+          ctx.clearRect(0, 0, 600, 400);
+
+          ctx.drawImage(img, 0, 0, 600, 400, 0, 0, 600, 400);  
+
         }
 
-        function drawShape(x1, y1, x2, y2, shape) {
-            context.beginPath();
-            if (shape === 'rectangle') {
-                const width = x2 - x1;
-                const height = y2 - y1;
-                context.rect(x1, y1, width, height);
-            } else if (shape === 'circle') {
-                const radius = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                context.arc(x1, y1, radius, 0, 2 * Math.PI);
-            } else if (shape === 'triangle') {
-                const width = x2 - x1;
-                const height = y2 - y1;
-                context.moveTo(x1, y1);
-                context.lineTo(x1 + width, y1);
-                context.lineTo(x1 + (width / 2), y1 - height);
-                context.closePath();
-            }
-            context.stroke();
-        }
-    </script>
-</body>
+      }
 
-</html>
+    }
+
+  }
+
+  $('undo').addEvent('click', function() {
+
+    history.undo(canvas, ctx);
+
+  });
+
+  
+
+  $('redo').addEvent('click', function() {
+
+    history.redo(canvas, ctx);
+
+  });
+
+  
+
+})(document.id)
