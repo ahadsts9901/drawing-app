@@ -8,8 +8,8 @@ let brush = document.getElementById("brush");
 let line = document.getElementById("line");
 let circle = document.getElementById("circle");
 let rectangle = document.getElementById("rectangle");
-let eraser = document.getElementById('eraser');
-let eraserSize = document.getElementById('eraser-size');
+let eraser = document.getElementById("eraser");
+let eraserSize = document.getElementById("eraser-size");
 let context = board.getContext("2d");
 let isLine = false;
 let finalOffsetX = 0;
@@ -22,14 +22,14 @@ window.addEventListener("load", () => {
     board.height = board.offsetHeight;
 });
 
-board.addEventListener("mousedown", function (event) {
+board.addEventListener("mousedown", function(event) {
     isLine = true;
     finalOffsetX = event.offsetX;
     finalOffsetY = event.offsetY;
     // console.log(event)
 });
 
-board.addEventListener("mousemove", function (event) {
+board.addEventListener("mousemove", function(event) {
     if (isLine) {
         if (eraser.checked) {
             context.beginPath();
@@ -38,13 +38,11 @@ board.addEventListener("mousemove", function (event) {
             context.stroke();
             finalOffsetX = event.offsetX;
             finalOffsetY = event.offsetY;
-            context.strokeStyle = "#fff";
+            context.globalCompositeOperation = "destination-out";
+            context.strokeStyle = board.style.backgroundColor;
             context.lineWidth = eraserSize.value;
-            if (fill.checked) {
-                context.strokeStyle = shapeFill.value;
-            }
-        }
-        else if (brush.checked) {
+            context.lineCap = "round";
+        } else if (brush.checked) {
             context.beginPath();
             context.moveTo(finalOffsetX, finalOffsetY);
             context.lineTo(event.offsetX, event.offsetY);
@@ -53,6 +51,7 @@ board.addEventListener("mousemove", function (event) {
             finalOffsetY = event.offsetY;
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
+            context.lineCap = "round";
         } else if (rectangle.checked) {
             // clearBoard()
             context.beginPath();
@@ -96,7 +95,11 @@ board.addEventListener("mousemove", function (event) {
     }
 });
 
-board.addEventListener("mouseup", function () {
+board.addEventListener("mouseup", function() {
+    isLine = false;
+});
+
+board.addEventListener("mouseout", function() {
     isLine = false;
 });
 
@@ -104,7 +107,7 @@ function clearBoard() {
     context.clearRect(0, 0, board.width, board.height);
 }
 
-board.addEventListener("touchstart", function (event) {
+board.addEventListener("touchstart", function(event) {
     event.preventDefault();
     isLine = true;
     let coordinates = getCoordinates(event.touches[0]);
@@ -112,7 +115,7 @@ board.addEventListener("touchstart", function (event) {
     finalOffsetY = coordinates.y;
 });
 
-board.addEventListener("touchmove", function (event) {
+board.addEventListener("touchmove", function(event) {
     event.preventDefault();
     if (isLine) {
         if (eraser.checked) {
@@ -123,13 +126,11 @@ board.addEventListener("touchmove", function (event) {
             context.stroke();
             finalOffsetX = coordinates.x;
             finalOffsetY = coordinates.y;
-            context.strokeStyle = "#fff";
+            context.globalCompositeOperation = "destination-out";
+            context.strokeStyle = board.style.backgroundColor;
             context.lineWidth = eraserSize.value;
-            if (fill.checked) {
-                context.strokeStyle = shapeFill.value;
-            }
-        }
-        else if (brush.checked) {
+            context.lineCap = "round";
+        } else if (brush.checked) {
             let coordinates = getCoordinates(event.touches[0]);
             context.beginPath();
             context.moveTo(finalOffsetX, finalOffsetY);
@@ -139,6 +140,7 @@ board.addEventListener("touchmove", function (event) {
             finalOffsetY = coordinates.y;
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
+            context.lineCap = "round";
         } else if (rectangle.checked) {
             let coordinates = getCoordinates(event.touches[0]);
             context.beginPath();
@@ -181,7 +183,7 @@ board.addEventListener("touchmove", function (event) {
     }
 });
 
-board.addEventListener("touchend", function () {
+board.addEventListener("touchend", function() {
     isLine = false;
 });
 
