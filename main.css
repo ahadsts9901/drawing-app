@@ -14,12 +14,21 @@ body {
     height: 100vh;
     margin: 0em;
     background-color: #efefef;
-    /* padding: 1em 0em; */
+    padding: 1em 1em;
     /* justify-self: center; */
 }
 
 .row {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.2em;
+    cursor: pointer;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     column-gap: 0.2em;
@@ -53,6 +62,8 @@ h3 {
 .options {
     background-color: #efefef;
     display: flex;
+    row-gap: 1em;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 1em;
@@ -87,7 +98,7 @@ h3 {
     color: #212121;
     padding: 0.8em 0.5em;
     border-radius: 10px;
-    /* width: ; */
+    width: 7em;
     height: 4em;
     font-size: 1em;
     cursor: pointer;
@@ -139,7 +150,6 @@ input[type="checkbox"] {
 
 .board {
     background-color: #fff;
-    background-image: url(./images/background.png);
     background-position: center center;
     background-size: 100px;
     background-repeat: repeat;
@@ -151,18 +161,31 @@ input[type="checkbox"] {
     /* border: 2px dashed #212121; */
 }
 
-.center {
-    width: 100%;
-    text-align: center;
-    color: #212121;
-    margin: 3em 0em 2em 0em;
-    position: fixed;
-    bottom: 0;
-}
-
 .center-2 {
     width: 100%;
     text-align: center;
     color: #212121;
     margin: 1em 0em;
+}
+
+@media only screen and (max-width: 950px) {
+
+    body {
+        font-size: 0.8em;
+    }
+
+}
+
+@media only screen and (max-width: 750px) {
+
+    body {
+        font-size: 0.7em;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+
+    body {
+        font-size: 0.7em;
+    }
 }
