@@ -176,7 +176,7 @@ input[type="checkbox"] {
     cursor: crosshair;
     border-radius: 15px;
     border: 0px;
-    border: 2px dashed #212121;
+    /* border: 2px dashed #212121; */
 }
 
 @media only screen and (max-width: 1130px) {
