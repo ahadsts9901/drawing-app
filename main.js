@@ -49,6 +49,7 @@ board.addEventListener("mousemove", function(event) {
             context.stroke();
             finalOffsetX = event.offsetX;
             finalOffsetY = event.offsetY;
+            context.globalCompositeOperation = "source-over";
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
             context.lineCap = "round";
@@ -61,6 +62,7 @@ board.addEventListener("mousemove", function(event) {
                 event.offsetX - finalOffsetX,
                 event.offsetY - finalOffsetY
             );
+            context.globalCompositeOperation = "source-over";
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
             context.stroke();
@@ -82,6 +84,7 @@ board.addEventListener("mousemove", function(event) {
                 Math.pow(event.offsetY - finalOffsetY, 2)
             );
             context.arc(finalOffsetX, finalOffsetY, radius, 0, 2 * Math.PI);
+            context.globalCompositeOperation = "source-over";
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
             context.stroke();
@@ -138,6 +141,7 @@ board.addEventListener("touchmove", function(event) {
             context.stroke();
             finalOffsetX = coordinates.x;
             finalOffsetY = coordinates.y;
+            context.globalCompositeOperation = "source-over";
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
             context.lineCap = "round";
@@ -150,6 +154,7 @@ board.addEventListener("touchmove", function(event) {
                 coordinates.x - finalOffsetX,
                 coordinates.y - finalOffsetY
             );
+            context.globalCompositeOperation = "source-over";
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
             context.fillRect(
@@ -171,6 +176,7 @@ board.addEventListener("touchmove", function(event) {
                 Math.pow(coordinates.y - finalOffsetY, 2)
             );
             context.arc(finalOffsetX, finalOffsetY, radius, 0, 2 * Math.PI);
+            context.globalCompositeOperation = "source-over";
             context.strokeStyle = color.value;
             context.lineWidth = size.value;
             context.stroke();
